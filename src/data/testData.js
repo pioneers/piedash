@@ -6,9 +6,6 @@ class Peripheral {
     }
 }
 
-
-
-
 export class Motor extends Peripheral {
     constructor(key, uid, device_name, velocity, dc) {
         super(key, uid, device_name);
@@ -27,5 +24,3 @@ export class Sensor extends Peripheral {
         }    
     }
 }
-
-// Generate peripherals with random parameter data

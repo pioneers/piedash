@@ -1,36 +1,22 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import PeripheralTable from "./PeripheralTable";
 
-export default function TableView() {
+export default function TableView({ data }) {
+    let peripheralGroups = {};
+    data.forEach((p) => {
+        let group = peripheralGroups[p.device_name] ?? [];
+        group.push(p);
+        peripheralGroups[p.device_name] = group;
+    });
+
+    for (const item in peripheralGroups) {
+        console.log(item)
+    }
+
     return (
-        <Table striped bordered condensed hover>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colSpan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </Table>
-    );
+            Object.keys(peripheralGroups).map((deviceName, i) => (
+                <PeripheralTable deviceName={deviceName} data={peripheralGroups[deviceName]} key={i}/>
+            ))
+        )  
+    
 }
