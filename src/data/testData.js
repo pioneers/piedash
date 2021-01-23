@@ -1,31 +1,31 @@
 class Peripheral {
-    constructor(uid, name) {
-        // type
+    constructor(key, uid, device_name) {
+        this.key = key;
         this.uid = uid;
-        this.name = name;
-        this.params = {};
+        this.device_name = device_name;
     }
 }
 
-/*
-class Motor extends Peripheral {
-    constructor(uid, name, velocity, dc) {
-        super(uid, name);
+
+
+
+export class Motor extends Peripheral {
+    constructor(key, uid, device_name, velocity, dc) {
+        super(key, uid, device_name);
         this.params = {
-            'velocity': velocity,
-            'dc': dc,
+            'Velocity': velocity,
+            'DC': dc,
         }    
     }
 }
 
-class SensorArray extends Peripheral {
-    constructor(uid, name, sensors) {
-        super(uid, name);
+export class Sensor extends Peripheral {
+    constructor(key, uid, device_name, distance) {
+        super(key, uid, device_name);
         this.params = {
-            'velocity': velocity,
-            'dc': dc,
+            'Distance': distance,
         }    
     }
-}*/
+}
 
 // Generate peripherals with random parameter data

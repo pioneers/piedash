@@ -1,7 +1,7 @@
 import React from 'react';
 import GraphView from './GraphView/GraphView';
 import TableView from './TableView/TableView';
-import testData from './testData';
+import { Motor } from './data/testData';
 
 import { Container, Row, Col } from 'react-bootstrap';
 function App() {
@@ -21,4 +21,8 @@ function App() {
   );
 }
 
+const getData = () => {
+    let m1 = Motor(Math.random(), 1, "Super motor", 100, 5);
+
+}
 export default App;
