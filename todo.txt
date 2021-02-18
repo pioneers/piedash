@@ -1,0 +1,8 @@
+Our idea:
+Carousel slide for each peripheral group
+On each slide, there is a dropdown where you can select which parameter to see
+
+TODO:
+Connect actual data to graphView.js
+Figure out a way to append/pop elements from data array
+Bound the data from 0 to 1
