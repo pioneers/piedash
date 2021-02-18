@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from 'react';
+import './App.css';
 import GraphView from './GraphView/GraphView';
 import TableView from './TableView/TableView';
 import { Motor, Sensor } from './data/testData';
@@ -40,7 +41,7 @@ const getData = () => {
     let m1 = new Motor(0, Math.random(), "motor", 100, 5);
     let m2 = new Motor(1, Math.random(), "motor", 15, 1);
     let s1 = new Sensor(2, Math.random(), "sensor", 10);
-    let s0 = new Sensor(5, Math.random(), "limitswitch", 7);
+    let s0 = new Sensor(5, Math.random(), "limitswitche", 7);
     let s2 = new Sensor(3, Math.random(), "sensor", 100 );
     let s3 = new Sensor(4, Math.random(), "sensor", 30);
     let s4 = new Sensor(5, Math.random(), "sensor");
