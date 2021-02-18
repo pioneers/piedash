@@ -4,7 +4,6 @@ import { Table } from 'react-bootstrap';
 export default function PeripheralTable({ deviceName, data, key }) {
     let updatedDevicename = deviceName.charAt(0).toUpperCase() + deviceName.substr(1).toLowerCase();
 ;
-
     return (
         <div>
             <h1>{updatedDevicename + "s"}</h1>
@@ -27,7 +26,7 @@ export default function PeripheralTable({ deviceName, data, key }) {
                                     <td>{device.key}</td>
                                     {
                                         Object.keys(device.params).map((dataField, i) => (
-                                            <td key={i}>{device.params[dataField] || "No Data Found"}</td>
+                                            <td key={i}>{device.params[dataField] ?? "No Data Found"}</td>
                                         ))
                                     }
                                 </tr>
