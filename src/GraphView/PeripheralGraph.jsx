@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import {
     LineChart,
     Line,
@@ -23,17 +23,22 @@ export default function GraphView({ deviceName, data, key }) {
     //     console.log(emptyArray);
     // }
     const [distArray,updateArray] = useState([]);
+    const [timer,updateTimer] = useState(0);
     let newObj = {};
-    newObj["Name"] = "Name";
+
+    newObj["Name"] = 0;
     for (let i=0; i<data.length;i++){
         let title = "Sensor"+ i ;
         newObj[title] = data[i].params["Distance"];
-        // console.log(data[i].params);
     }
-    // console.log(newObj);
-    distArray.push(newObj);
-    updateArray([...distArray]);
-    console.log(distArray);
+    useEffect( () => {
+        updateTimer(timer + 2000);
+        setTimeout(() => {
+            updateArray([...distArray,newObj]);
+        }, 2000);
+    }
+
+    )
     return (
         <LineChart
             width={500}
