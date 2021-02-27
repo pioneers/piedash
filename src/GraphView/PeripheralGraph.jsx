@@ -25,17 +25,43 @@ export default function GraphView({ deviceName, data, key }) {
     const [distArray,updateArray] = useState([]);
     const [timer,updateTimer] = useState(0);
     let newObj = {};
+    newObj["Name"] = timer;
 
-    newObj["Name"] = 0;
+    const resize = (sizeBool) => {if (sizeBool){
+        // let counter = 0;
+        // let newDataArray = [];
+        // while(counter<50){
+        //     let newObjArray = {};
+        //     newObjArray["Name"] = counter;
+        //     for (let k = 0;k <data.length;k++){
+        //         let titleOfDataPoint = "Sensor" + k;
+        //         let currCounter = 0;
+        //         for (let j = counter; j<counter +10; j++){
+        //             currCounter +=distArray[j][titleOfDataPoint];
+        //         }
+        //         newObjArray[titleOfDataPoint] = currCounter/10;
+        //     }
+        //     newDataArray.push(newObjArray);
+        //     counter+=10;
+
+        // }
+        // distArray = newDataArray;
+        updateArray([]);
+        // updateArray([distArray]);
+        console.log(distArray.length);
+        console.log(distArray);
+    }
+    }
     for (let i=0; i<data.length;i++){
         let title = "Sensor"+ i ;
         newObj[title] = data[i].params["Distance"];
     }
     useEffect( () => {
-        updateTimer(timer + 2000);
         setTimeout(() => {
+            updateTimer(timer + 1);
             updateArray([...distArray,newObj]);
-        }, 2000);
+            resize(distArray.length>5 ? true : false);
+        }, 1000);
     }
 
     )
