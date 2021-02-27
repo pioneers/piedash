@@ -1,4 +1,5 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
+import { Dropdown, SplitButton, ButtonToolbar } from "react-bootstrap";
 import {
     LineChart,
     Line,
@@ -26,20 +27,42 @@ export default function GraphView({ deviceName, data, key }) {
     const [timer,updateTimer] = useState(0);
     let newObj = {};
 
-    newObj["Name"] = 0;
+    newObj["Name"] = timer;
     for (let i=0; i<data.length;i++){
         let title = "Sensor"+ i ;
         newObj[title] = data[i].params["Distance"];
     }
     useEffect( () => {
-        updateTimer(timer + 2000);
-        setTimeout(() => {
-            updateArray([...distArray,newObj]);
-        }, 2000);
+        // setTimeout(() => {
+        //     updateTimer(timer + 0.25);
+        //     updateArray([...distArray,newObj]);
+        // }, 0.25);
+    })
+    
+    const BUTTONS = ['Distance'];
+    function renderDropdownButton(title, i) {
+        return (
+            <SplitButton
+                bsStyle={title.toLowerCase()}
+                title={title}
+                key={i}
+                id={`split-button-basic-${i}`}
+            >
+            <Dropdown.Item eventKey="1">Velocity</Dropdown.Item>
+            <Dropdown.Item eventKey="2">DC</Dropdown.Item>
+            <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+            <Dropdown.Item divider />
+            <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+            </SplitButton>
+        )
     }
 
-    )
+
     return (
+        <div>
+        <div className="dropdown">
+            <ButtonToolbar>{BUTTONS.map(renderDropdownButton)}</ButtonToolbar>
+        </div>
         <LineChart
             width={500}
             height={300}
@@ -67,5 +90,6 @@ export default function GraphView({ deviceName, data, key }) {
             <Line type="monotone" dataKey="Sensor2" stroke="#82ca9d" />
             <Line type="monotone" dataKey="Sensor3" stroke="#82ca9a" />
         </LineChart>
+        </div>
     );
 }
