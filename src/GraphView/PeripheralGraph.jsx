@@ -25,6 +25,7 @@ export default function GraphView({ deviceName, data, key }) {
     // }
     const [distArray,updateArray] = useState([]);
     const [timer,updateTimer] = useState(0);
+    // const [newObj, setNewObj] = useState({"Name": timer})
     let newObj = {};
     newObj["Name"] = timer;
 
@@ -47,10 +48,11 @@ export default function GraphView({ deviceName, data, key }) {
 
         // }
         // distArray = newDataArray;
-        updateArray([]);
         // updateArray([distArray]);
-        console.log(distArray.length);
-        console.log(distArray);
+        let newDistArray = distArray.slice(0, 2);
+        updateArray(newDistArray);
+        // console.log(distArray.length);
+        // console.log(distArray);
     }
     }
     for (let i=0; i<data.length;i++){
@@ -59,10 +61,11 @@ export default function GraphView({ deviceName, data, key }) {
     }
     useEffect( () => {
         setTimeout(() => {
-            updateTimer(timer + 1);
+            updateTimer(timer + 0.5);
             updateArray([...distArray,newObj]);
-            resize(distArray.length>5 ? true : false);
-        }, 1000);
+            // resize(distArray.length > 9 && distArray.length % 5 == 0 ? true : false);
+            console.log(distArray);
+        }, .5);
     })
     
     const BUTTONS = ['Distance'];

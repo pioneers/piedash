@@ -18,7 +18,7 @@ function App() {
 
       setTimeout(() => {
           setTestData([...testData]);
-      }, 1000);
+      }, 0.5);
   })
 
   return (
