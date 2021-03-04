@@ -26,18 +26,18 @@ export default function GraphView({ deviceName, data, key }) {
     const [distArray,updateArray] = useState([]);
     const [timer,updateTimer] = useState(0);
     let newObj = {};
-
     newObj["Name"] = timer;
     for (let i=0; i<data.length;i++){
         let title = "Sensor"+ i ;
         newObj[title] = data[i].params["Distance"];
     }
     useEffect( () => {
-        // setTimeout(() => {
-        //     updateTimer(timer + 0.25);
-        //     updateArray([...distArray,newObj]);
-        // }, 0.25);
-    })
+      setTimeout(() => {
+            updateTimer(timer + 1);
+            updateArray([...distArray,newObj]);
+            resize(distArray.length>5 ? true : false);
+        }, 1000);
+    });
     
     const BUTTONS = ['Distance'];
     function renderDropdownButton(title, i) {
@@ -56,7 +56,6 @@ export default function GraphView({ deviceName, data, key }) {
             </SplitButton>
         )
     }
-
 
     return (
         <div>
