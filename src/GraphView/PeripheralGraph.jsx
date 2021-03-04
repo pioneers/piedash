@@ -1,4 +1,5 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
+import { Dropdown, SplitButton, ButtonToolbar } from "react-bootstrap";
 import {
     LineChart,
     Line,
@@ -26,46 +27,41 @@ export default function GraphView({ deviceName, data, key }) {
     const [timer,updateTimer] = useState(0);
     let newObj = {};
     newObj["Name"] = timer;
-
-    const resize = (sizeBool) => {if (sizeBool){
-        // let counter = 0;
-        // let newDataArray = [];
-        // while(counter<50){
-        //     let newObjArray = {};
-        //     newObjArray["Name"] = counter;
-        //     for (let k = 0;k <data.length;k++){
-        //         let titleOfDataPoint = "Sensor" + k;
-        //         let currCounter = 0;
-        //         for (let j = counter; j<counter +10; j++){
-        //             currCounter +=distArray[j][titleOfDataPoint];
-        //         }
-        //         newObjArray[titleOfDataPoint] = currCounter/10;
-        //     }
-        //     newDataArray.push(newObjArray);
-        //     counter+=10;
-
-        // }
-        // distArray = newDataArray;
-        updateArray([]);
-        // updateArray([distArray]);
-        console.log(distArray.length);
-        console.log(distArray);
-    }
-    }
     for (let i=0; i<data.length;i++){
         let title = "Sensor"+ i ;
         newObj[title] = data[i].params["Distance"];
     }
     useEffect( () => {
-        setTimeout(() => {
+      setTimeout(() => {
             updateTimer(timer + 1);
             updateArray([...distArray,newObj]);
             resize(distArray.length>5 ? true : false);
         }, 1000);
+    });
+    
+    const BUTTONS = ['Distance'];
+    function renderDropdownButton(title, i) {
+        return (
+            <SplitButton
+                bsStyle={title.toLowerCase()}
+                title={title}
+                key={i}
+                id={`split-button-basic-${i}`}
+            >
+            <Dropdown.Item eventKey="1">Velocity</Dropdown.Item>
+            <Dropdown.Item eventKey="2">DC</Dropdown.Item>
+            <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+            <Dropdown.Item divider />
+            <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+            </SplitButton>
+        )
     }
 
-    )
     return (
+        <div>
+        <div className="dropdown">
+            <ButtonToolbar>{BUTTONS.map(renderDropdownButton)}</ButtonToolbar>
+        </div>
         <LineChart
             width={500}
             height={300}
@@ -93,5 +89,6 @@ export default function GraphView({ deviceName, data, key }) {
             <Line type="monotone" dataKey="Sensor2" stroke="#82ca9d" />
             <Line type="monotone" dataKey="Sensor3" stroke="#82ca9a" />
         </LineChart>
+        </div>
     );
 }
